@@ -566,6 +566,13 @@ Direct:  mainreg   is bank=0 & mainreg	{ tmp:3 = mainreg + 0x7f0000; export *[RA
 @elif defined(MCS51) || defined(MCS80390)
 Direct:  mainreg   is bank=0 & mainreg	{ export *[INTMEM]:1 mainreg; }
 @endif
+
+Direct:  direct    is bank=1 & direct 	{ export *[SFR]:1 direct; }
+Direct:  PSW       is bank=1 & direct=0xD0 & PSW  { export PSW;  }
+Direct:  "A"       is bank=1 & direct=0xE0 	{ export ACC; }
+Direct:  B         is bank=1 & direct=0xF0 & B  { export B;  }
+Direct:  DPL       is bank=1 & direct=0x82 & DPL 	{ export DPL; }
+Direct:  DPH       is bank=1 & direct=0x83 & DPH  { export DPH;  }
 Direct:  R0        is direct=0x0 & R0 	{ export R0; }
 Direct:  R1        is direct=0x1 & R1 	{ export R1; }
 Direct:  R2        is direct=0x2 & R2 	{ export R2; }
@@ -574,12 +581,31 @@ Direct:  R4        is direct=0x4 & R4 	{ export R4; }
 Direct:  R5        is direct=0x5 & R5 	{ export R5; }
 Direct:  R6        is direct=0x6 & R6 	{ export R6; }
 Direct:  R7        is direct=0x7 & R7 	{ export R7; }
-Direct:  direct    is bank=1 & direct 	{ export *[SFR]:1 direct; }
-Direct:  PSW       is bank=1 & direct=0xD0 & PSW  { export PSW;  }
-Direct:  "A"       is bank=1 & direct=0xE0 	{ export ACC; }
-Direct:  B         is bank=1 & direct=0xF0 & B  { export B;  }
-Direct:  DPL       is bank=1 & direct=0x82 & DPL 	{ export DPL; }
-Direct:  DPH       is bank=1 & direct=0x83 & DPH  { export DPH;  }
+Direct:  R0        is direct=0x8 & R0 	{ export R0; }
+Direct:  R1        is direct=0x9 & R1 	{ export R1; }
+Direct:  R2        is direct=0xa & R2 	{ export R2; }
+Direct:  R3        is direct=0xb & R3 	{ export R3; }
+Direct:  R4        is direct=0xc & R4 	{ export R4; }
+Direct:  R5        is direct=0xd & R5 	{ export R5; }
+Direct:  R6        is direct=0xe & R6 	{ export R6; }
+Direct:  R7        is direct=0xf & R7 	{ export R7; }
+Direct:  R0        is direct=0x10 & R0 	{ export R0; }
+Direct:  R1        is direct=0x11 & R1 	{ export R1; }
+Direct:  R2        is direct=0x12 & R2 	{ export R2; }
+Direct:  R3        is direct=0x13 & R3 	{ export R3; }
+Direct:  R4        is direct=0x14 & R4 	{ export R4; }
+Direct:  R5        is direct=0x15 & R5 	{ export R5; }
+Direct:  R6        is direct=0x16 & R6 	{ export R6; }
+Direct:  R7        is direct=0x17 & R7 	{ export R7; }
+Direct:  R0        is direct=0x18 & R0 	{ export R0; }
+Direct:  R1        is direct=0x19 & R1 	{ export R1; }
+Direct:  R2        is direct=0x1a & R2 	{ export R2; }
+Direct:  R3        is direct=0x1b & R3 	{ export R3; }
+Direct:  R4        is direct=0x1c & R4 	{ export R4; }
+Direct:  R5        is direct=0x1d & R5 	{ export R5; }
+Direct:  R6        is direct=0x1e & R6 	{ export R6; }
+Direct:  R7        is direct=0x1f & R7 	{ export R7; }
+
 @if defined(MCS80390)
 Direct:  DPX       is bank=1 & direct=0x93 & DPX  { export DPX;  }
 @endif
@@ -594,6 +620,38 @@ Direct2:  mainreg2  is bank2=0 & mainreg2	{ tmp:3 = mainreg2 + 0x7f0000; export 
 @elif defined(MCS51) || defined(MCS80390)
 Direct2:  mainreg2  is bank2=0 & mainreg2	{ export *[INTMEM]:1 mainreg2; }
 @endif
+Direct2:  R0        is direct=0x0 & R0 	{ export R0; }
+Direct2:  R1        is direct=0x1 & R1 	{ export R1; }
+Direct2:  R2        is direct=0x2 & R2 	{ export R2; }
+Direct2:  R3        is direct=0x3 & R3 	{ export R3; }
+Direct2:  R4        is direct=0x4 & R4 	{ export R4; }
+Direct2:  R5        is direct=0x5 & R5 	{ export R5; }
+Direct2:  R6        is direct=0x6 & R6 	{ export R6; }
+Direct2:  R7        is direct=0x7 & R7 	{ export R7; }
+Direct2:  R0        is direct=0x8 & R0 	{ export R0; }
+Direct2:  R1        is direct=0x9 & R1 	{ export R1; }
+Direct2:  R2        is direct=0xa & R2 	{ export R2; }
+Direct2:  R3        is direct=0xb & R3 	{ export R3; }
+Direct2:  R4        is direct=0xc & R4 	{ export R4; }
+Direct2:  R5        is direct=0xd & R5 	{ export R5; }
+Direct2:  R6        is direct=0xe & R6 	{ export R6; }
+Direct2:  R7        is direct=0xf & R7 	{ export R7; }
+Direct2:  R0        is direct=0x10 & R0 	{ export R0; }
+Direct2:  R1        is direct=0x11 & R1 	{ export R1; }
+Direct2:  R2        is direct=0x12 & R2 	{ export R2; }
+Direct2:  R3        is direct=0x13 & R3 	{ export R3; }
+Direct2:  R4        is direct=0x14 & R4 	{ export R4; }
+Direct2:  R5        is direct=0x15 & R5 	{ export R5; }
+Direct2:  R6        is direct=0x16 & R6 	{ export R6; }
+Direct2:  R7        is direct=0x17 & R7 	{ export R7; }
+Direct2:  R0        is direct=0x18 & R0 	{ export R0; }
+Direct2:  R1        is direct=0x19 & R1 	{ export R1; }
+Direct2:  R2        is direct=0x1a & R2 	{ export R2; }
+Direct2:  R3        is direct=0x1b & R3 	{ export R3; }
+Direct2:  R4        is direct=0x1c & R4 	{ export R4; }
+Direct2:  R5        is direct=0x1d & R5 	{ export R5; }
+Direct2:  R6        is direct=0x1e & R6 	{ export R6; }
+Direct2:  R7        is direct=0x1f & R7 	{ export R7; }
 Direct2: direct2   is bank2=1 & direct2  	{ export *[SFR]:1 direct2; }
 Direct2: PSW       is bank2=1 & direct2=0xD0 & PSW  { export PSW;  }
 Direct2: "A"       is bank2=1 & direct2=0xE0	{ export ACC; }
@@ -925,4 +983,3 @@ pc:3 = 0; pop24(pc); return[pc];
 :XRL Areg,Data   is $(GROUP1) & ophi=6 & oplo=4 & Areg; Data	{ ACC = ACC ^ Data; }
 :XRL Direct,Areg is $(GROUP1) & ophi=6 & oplo=2 & Areg; Direct	{ Direct = Direct ^ ACC; }
 :XRL Direct,Data is $(GROUP1) & ophi=6 & oplo=3; Direct; Data	{ Direct = Direct ^ Data; }
-

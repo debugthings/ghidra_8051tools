@@ -11,14 +11,14 @@
 
   <default_symbols>
 
-    <symbol name="BANK0_R0" address="INTMEM:00" />
+    <!-- <symbol name="BANK0_R0" address="INTMEM:00" />
     <symbol name="BANK0_R1" address="INTMEM:01" />
     <symbol name="BANK0_R2" address="INTMEM:02" />
     <symbol name="BANK0_R3" address="INTMEM:03" />
     <symbol name="BANK0_R4" address="INTMEM:04" />
     <symbol name="BANK0_R5" address="INTMEM:05" />
     <symbol name="BANK0_R6" address="INTMEM:06" />
-    <symbol name="BANK0_R7" address="INTMEM:07" />
+    <symbol name="BANK0_R7" address="INTMEM:07" /> -->
 
     <symbol name="BANK1_R0" address="INTMEM:08" />
     <symbol name="BANK1_R1" address="INTMEM:09" />

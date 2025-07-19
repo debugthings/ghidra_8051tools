@@ -23,37 +23,28 @@
 	<default_proto>
 		<prototype name="ret_in_r7" extrapop="-2" stackshift="-2" strategy="register">
 			<input>
-				<pentry maxsize="2" minsize="1">
+				<pentry maxsize="4" minsize="4" metatype="long">
+					<register name="R4R5R6R7" />
+				</pentry>
+				<pentry maxsize="4" minsize="4" metatype="long">
+					<register name="R0R1R2R3" />
+				</pentry>
+				<pentry maxsize="2" minsize="1" metatype="int">
 					<register name="R6R7" />
 				</pentry>
-				<pentry maxsize="2" minsize="1">
+				<pentry maxsize="2" minsize="1" metatype="int">
 					<register name="R4R5" />
 				</pentry>
-				<pentry maxsize="2" minsize="1">
-					<register name="R2R3" />
-				</pentry>
-				<pentry maxsize="2" minsize="2">
-					<register name="DPTR" />
+				<pentry maxsize="2" minsize="1" metatype="int">
+					<register name="R3R2" />
 				</pentry>
 				<pentry maxsize="3" minsize="3">
 					<register name="R1R2R3" />
-				</pentry>
-				<pentry maxsize="4" minsize="4">
-					<register name="R4R5R6R7" />
-				</pentry>
-				<pentry maxsize="4" minsize="4">
-					<register name="R0R1R2R3" />
 				</pentry>
 			</input>
 			<output>
-				<pentry maxsize="2" minsize="2">
-					<register name="DPTR" />
-				</pentry>
 				<pentry maxsize="4" minsize="4">
 					<register name="R4R5R6R7" />
-				</pentry>
-				<pentry maxsize="3" minsize="3">
-					<register name="R1R2R3" />
 				</pentry>
 			</output>
 			<unaffected>
@@ -68,16 +59,43 @@
 	</default_proto>
 
 	<prototype name="ret_in_a" extrapop="-2" stackshift="-2" strategy="register">
-		<input>
-				<pentry maxsize="2" minsize="1">
+			<input>
+				<pentry maxsize="4" minsize="4" metatype="long">
+					<register name="R4R5R6R7" />
+				</pentry>
+				<pentry maxsize="4" minsize="4" metatype="long">
+					<register name="R0R1R2R3" />
+				</pentry>
+				<pentry maxsize="2" minsize="1" metatype="int">
 					<register name="R6R7" />
 				</pentry>
-				<pentry maxsize="2" minsize="1">
+				<pentry maxsize="2" minsize="1" metatype="int">
 					<register name="R4R5" />
 				</pentry>
-				<pentry maxsize="2" minsize="1">
-					<register name="R2R3" />
+				<pentry maxsize="2" minsize="1" metatype="int">
+					<register name="R3R2" />
 				</pentry>
+				<pentry maxsize="3" minsize="3">
+					<register name="R1R2R3" />
+				</pentry>
+			</input>
+			<output>
+				<pentry maxsize="2" minsize="1">
+					<register name="AB" />
+				</pentry>
+			</output>
+			<unaffected>
+				<register name="SP" />
+			</unaffected>
+			<!-- This first range lists the permissible stack offsets
+		         that can be used as scratch and/or local variables  -->
+			<localrange>
+				<range space="stack" first="0x0" last="0xf" />
+			</localrange>
+		</prototype>
+
+	<prototype name="__ldandstore" extrapop="-2" stackshift="-2" strategy="register">
+			<input>
 				<pentry maxsize="2" minsize="2">
 					<register name="DPTR" />
 				</pentry>
@@ -90,46 +108,19 @@
 				<pentry maxsize="4" minsize="4">
 					<register name="R0R1R2R3" />
 				</pentry>
-			</input>
-		<output>
-			<pentry maxsize="1" minsize="1">
-				<register name="ACC" />
-			</pentry>
-		</output>
-		<unaffected>
-			<register name="SP" />
-		</unaffected>
-		<!-- This first range lists the permissible stack offsets
-             that can be used as scratch and/or local variables  -->
-		<localrange>
-			<range space="stack" first="0x0" last="0xf" />
-		</localrange>
-	</prototype>
-
-	<prototype name="__ldandstore" extrapop="-2" stackshift="-2" strategy="register">
-			<input>
 				<pentry maxsize="2" minsize="1">
 					<register name="AB" />
 				</pentry>
-				<pentry maxsize="3" minsize="3">
-					<register name="R1R2R3" />
-				</pentry>
-				<pentry maxsize="4" minsize="4">
-					<register name="R4R5R6R7" />
-				</pentry>
-				<pentry maxsize="4" minsize="4">
-					<register name="R0R1R2R3" />
-				</pentry>
 			</input>
 			<output>
-				<pentry maxsize="2" minsize="1">
-					<register name="R6R7" />
-				</pentry>
-				<pentry maxsize="4" minsize="4">
+				<pentry maxsize="4" minsize="1">
 					<register name="R4R5R6R7" />
 				</pentry>
 				<pentry maxsize="3" minsize="3">
 					<register name="R1R2R3" />
+				</pentry>
+				<pentry maxsize="2" minsize="1">
+					<register name="AB" />
 				</pentry>
 			</output>
 			<unaffected>

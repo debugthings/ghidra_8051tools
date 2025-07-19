@@ -38,29 +38,36 @@ public class LoadStringsForPUTS extends GhidraScript {
 
     // Find symbol by name (modify for the symbol you're looking for)
 
+
     List<Symbol> symbols = new ArrayList<Symbol>();
+
+        // Store pointer to XDATA memory
+    symbols.addAll(getSymbols("?C?PSTXDATA", currentProgram.getGlobalNamespace()));
+    symbols.addAll(getSymbols("?C?PSTXDATA1", currentProgram.getGlobalNamespace()));
+
     // WRITE_HTTP_STATUS_CODE
     symbols.addAll(getSymbols("WRITE_HTTP_STATUS_CODE", currentProgram.getGlobalNamespace()));
     symbols.addAll(getSymbols("PRINT_AND_LOAD", currentProgram.getGlobalNamespace()));
-    // Store pointer to XDATA memory
-    symbols.addAll(getSymbols("?C?PSTXDATA", currentProgram.getGlobalNamespace()));
+
     // PUTS functions
-    symbols.addAll(getSymbols("PUTS_SET21.7", currentProgram.getGlobalNamespace()));
-    symbols.addAll(getSymbols("PUTS_", currentProgram.getGlobalNamespace()));
-    symbols.addAll(getSymbols("PUTS", currentProgram.getGlobalNamespace()));
-    symbols.addAll(getSymbols("PUTS_T", currentProgram.getGlobalNamespace()));
-    symbols.addAll(getSymbols("PUTS_B6", currentProgram.getGlobalNamespace()));
-    symbols.addAll(getSymbols("PUTS_B6_T", currentProgram.getGlobalNamespace()));
     symbols.addAll(getSymbols("[_PUTS]", currentProgram.getGlobalNamespace()));
+    // symbols.addAll(getSymbols("PUTS_SET21.7", currentProgram.getGlobalNamespace()));
+    // symbols.addAll(getSymbols("PUTS_", currentProgram.getGlobalNamespace()));
+    // symbols.addAll(getSymbols("PUTS", currentProgram.getGlobalNamespace()));
+    // symbols.addAll(getSymbols("PUTS_T", currentProgram.getGlobalNamespace()));
+    // symbols.addAll(getSymbols("PUTS_B6", currentProgram.getGlobalNamespace()));
+    // symbols.addAll(getSymbols("PUTS_B6_T", currentProgram.getGlobalNamespace()));
     // SPRINTF functions
-    symbols.addAll(getSymbols("SPRINTF_", currentProgram.getGlobalNamespace()));
+    symbols.addAll(getSymbols("SPRINTF_CODE", currentProgram.getGlobalNamespace()));
+    symbols.addAll(getSymbols("SPRINTF_BANK1", currentProgram.getGlobalNamespace()));
     symbols.addAll(getSymbols("(_SPRINTF)", currentProgram.getGlobalNamespace()));
     // SCANF functions
+    symbols.addAll(getSymbols("[SCANF517]", currentProgram.getGlobalNamespace()));
     symbols.addAll(getSymbols("_SCANF517", currentProgram.getGlobalNamespace()));
     symbols.addAll(getSymbols("[_GETS]", currentProgram.getGlobalNamespace()));
     // String manipulation functions
-    symbols.addAll(getSymbols("STRCMP", currentProgram.getGlobalNamespace()));
-    symbols.addAll(getSymbols("STRCPY", currentProgram.getGlobalNamespace()));
+    symbols.addAll(getSymbols("?C?STRCMP", currentProgram.getGlobalNamespace()));
+    symbols.addAll(getSymbols("?C?STRCPY", currentProgram.getGlobalNamespace()));
     symbols.addAll(getSymbols("?C?MEMCMP", currentProgram.getGlobalNamespace()));
 
     if (symbols == null || symbols.isEmpty()) {
@@ -96,7 +103,7 @@ public class LoadStringsForPUTS extends GhidraScript {
               currentProgram.getFunctionManager().getFunctionContaining(callToPUTSAddr);
             DecompileResults decompileResults = symbolMap.get(function);
             if (decompileResults == null) {
-              decompileResults = decompInterface.decompileFunction(function, 0, null);
+              decompileResults = decompInterface.decompileFunction(function, 0, monitor);
               if (decompileResults == null) {
                 println("Decompilation failed for function: " + function.getName() + " at: " +
                   callToPUTSAddr);

@@ -1,5 +1,7 @@
 package com.debugthings.ghidra.utilities;
 
+import java.sql.Ref;
+
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.StringDataType;
@@ -26,6 +28,42 @@ public class Utilities {
         return input.substring(0, limit) + "...";
     }
 
+    /**
+     * Adds a memory reference to a string in the DPTR memory space.
+     *
+     * @param referenceToAddStringRefTo The address where the string reference should be added.
+     * @param stringRefAddress           The address of the string in memory.
+     * @param primary                    Whether this reference should be marked as primary.
+     * @param isRead                     Whether this reference is a read or write operation.
+     * @throws CodeUnitInsertionException If there is an error inserting the code unit.
+     */
+    public void addDPTRMemoryReference(Address referenceToAddStringRefTo, Address stringRefAddress,
+            Boolean primary, Boolean isRead) throws CodeUnitInsertionException {
+        // This address is the location of the string in the memory space and we can now create the data type for it
+        if (stringRefAddress == null || referenceToAddStringRefTo == null) {
+            return;
+        }
+
+        Reference memoryAddressRef =
+            gs.getCurrentProgram()
+                    .getReferenceManager()
+                    .addMemoryReference(referenceToAddStringRefTo, stringRefAddress,
+                        isRead ? RefType.READ : RefType.WRITE,
+                        null,
+                        0);
+
+        gs.getCurrentProgram().getReferenceManager().setPrimary(memoryAddressRef, primary);
+
+    }
+
+    /**
+     * Adds a string reference to the specified address.
+     *
+     * @param referenceToAddStringRefTo The address where the string reference should be added.
+     * @param stringRefAddress           The address of the string in memory.
+     * @param primary                    Whether this reference should be marked as primary.
+     * @throws CodeUnitInsertionException If there is an error inserting the code unit.
+     */
     public void addStringReference(Address referenceToAddStringRefTo, Address stringRefAddress,
             Boolean primary) throws CodeUnitInsertionException {
         // This address is the location of the string in the memory space and we can now create the data type for it
@@ -131,14 +169,16 @@ public class Utilities {
         }
         return refAddress;
     }
+    
 
     public Boolean getValuesFromRegistersR3(Instruction instr) throws CodeUnitInsertionException {
         long r3Value = extractConstantValue(instr, "R3");
 
         if (r3Value == Long.MIN_VALUE) {
-            gs.println("R3 value not found or invalid in ("+ instr.getAddress() +") instruction: " + instr);
+            gs.println("R3 value not found or invalid in (" + instr.getAddress() +
+                ") instruction: " + instr);
             return false; // No valid R3 value found
-            
+
         }
         // Ensure the constant falls within the range
         if (r3Value >= 0x82 && r3Value < 0xC1) {
@@ -162,10 +202,11 @@ public class Utilities {
     public Boolean getValuesFromRegistersR5(Instruction instr) throws CodeUnitInsertionException {
         long r3Value = extractConstantValue(instr, "R5");
 
-         if (r3Value == Long.MIN_VALUE) {
-            gs.println("R0 value not found or invalid in ("+ instr.getAddress() +") instruction: " + instr);
+        if (r3Value == Long.MIN_VALUE) {
+            gs.println("R0 value not found or invalid in (" + instr.getAddress() +
+                ") instruction: " + instr);
             return false; // No valid R3 value found
-            
+
         }
 
         // Ensure the constant falls within the range
